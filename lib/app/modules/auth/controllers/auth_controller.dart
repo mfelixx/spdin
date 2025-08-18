@@ -46,7 +46,6 @@ class AuthController extends GetxController {
       }
       Get.snackbar("Sukses", "Berhasil masuk");
       currentUser.value = doc.data()!["nippegawai"];
-      print(currentUser.value);
       _navigateBasedOnRole();
     } catch (e) {
       Get.snackbar("Terjadi kesalahan", "Email atau kata sandi salah");
@@ -65,6 +64,13 @@ class AuthController extends GetxController {
         'fcm_token': token,
       });
     }
+  }
+
+  Future<void> clearFcmTokenOnLogout() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      "fcm_token": FieldValue.delete(),
+    });
   }
 
   void _navigateBasedOnRole() {
@@ -111,7 +117,10 @@ class AuthController extends GetxController {
       onConfirm: () {
         _auth.signOut();
         isAuth.value = false;
-        role.value = "";
+        if (role.value == "ppk") {
+          clearFcmTokenOnLogout();
+          role.value = "";
+        }
         currentUser.value = "";
         currentRoute = Routes.AUTH;
         Get.offAllNamed(Routes.AUTH);

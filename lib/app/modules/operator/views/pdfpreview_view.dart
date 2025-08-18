@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:perjadin_kpu/app/modules/operator/controllers/operator_controller.dart';
-// import 'package:printing/printing.dart';
 
 class PdfpreviewView extends GetView<OperatorController> {
   PdfpreviewView({super.key});

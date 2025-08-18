@@ -36,7 +36,6 @@ class PerjadinView extends GetView {
                         border: InputBorder.none,
                       ),
                       onChanged: (value) {
-                        print("Searching for: $value");
                         _adminC.searchPerjadin(value);
                       },
                     ),

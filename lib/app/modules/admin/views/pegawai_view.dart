@@ -34,7 +34,6 @@ class PegawaiView extends GetView {
                         border: InputBorder.none,
                       ),
                       onChanged: (value) {
-                        print("Searching for: $value");
                         _adminC.searchUser(value);
                       },
                     ),

@@ -177,7 +177,6 @@ class AdminController extends GetxController {
                 ),
               )
               .toList();
-      print("Search results: ${tempSearch.length} found");
     } catch (e) {
       print("Error searchUser: $e");
       tempSearch.clear();
@@ -220,8 +219,6 @@ class AdminController extends GetxController {
                 return nospd.contains(query) || pesertaMatch;
               })
               .toList();
-      print("Search results: ${tempSearchPerjadin.length} found");
-      print("Search results: $tempSearchPerjadin");
     } catch (e) {
       print("Error searchPerjadi: $e");
       tempSearchPerjadin.clear();

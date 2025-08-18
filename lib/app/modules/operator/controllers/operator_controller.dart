@@ -113,7 +113,6 @@ class OperatorController extends GetxController {
   }
 
   void tambahPeserta() {
-    print(peserta);
     peserta.add(null);
   }
 
@@ -373,9 +372,11 @@ class OperatorController extends GetxController {
     final currentPPK =
         await db.collection("users").where("role", isEqualTo: "ppk").get();
 
-    if (currentPPK.docs.first.data()['fcm_token']) {
+    if (currentPPK.docs.first.data()['fcm_token'].isNotEmpty) {
       final tokenPPK = currentPPK.docs.first.data()['fcm_token'];
       kirimNotifikasiKePPK(id, tokenPPK);
+    } else {
+      print("Token PPK tidak ditemukan atau kosong.");
     }
 
     clearFields();
@@ -919,7 +920,6 @@ class OperatorController extends GetxController {
   Future<void> generateSPD2(String nipPegawai, String perjadinId) async {
     await initializeDateFormatting('id_ID');
     Intl.defaultLocale = 'id_ID';
-    // print("ini : ${nipPegawai}");
 
     final docPerjadin =
         await db.collection("surat_perjadin").doc(perjadinId).get();
@@ -927,7 +927,6 @@ class OperatorController extends GetxController {
     Map<String, dynamic> dataUser = {};
 
     for (var item in dataPerjadin["peserta"]) {
-      // print(item["nippegawai"] == nipPegawai ?? "false");
       if (item["nippegawai"] == nipPegawai) {
         dataUser.addAll(item);
       }
