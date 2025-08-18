@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "642935907595",
+    "project_id": "perjadin-kpu",
+    "storage_bucket": "perjadin-kpu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642935907595:android:61df730b67dff17f192e0e",
+        "android_client_info": {
+          "package_name": "com.perjadin.kpu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbKTyknbILx62j5q3nwhyqZ5VGI7cELVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
