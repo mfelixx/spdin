@@ -6,10 +6,9 @@ import 'package:perjadin_kpu/app/modules/admin/controllers/admin_controller.dart
 import 'package:perjadin_kpu/app/modules/operator/controllers/operator_controller.dart';
 import 'package:perjadin_kpu/app/routes/app_pages.dart';
 
-class PerjadinView extends GetView {
+class PerjadinView extends GetView<OperatorController> {
   PerjadinView({super.key});
   final _adminC = Get.find<AdminController>();
-  final _operatorC = Get.put(OperatorController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +97,7 @@ class PerjadinView extends GetView {
                                 ),
                               ),
                               onTap: () {
-                                _operatorC.getPerjadin(
+                                controller.getPerjadin(
                                   _adminC.tempSearchPerjadin[index].id,
                                 );
                                 Get.toNamed(
@@ -181,7 +180,7 @@ class PerjadinView extends GetView {
                                       ),
                                     ),
                                     onTap: () {
-                                      _operatorC.getPerjadin(
+                                      controller.getPerjadin(
                                         perjadin[index].id,
                                       );
                                       Get.toNamed(

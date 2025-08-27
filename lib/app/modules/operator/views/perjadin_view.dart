@@ -23,7 +23,7 @@ class PerjadinView extends GetView {
             ),
             child: Row(
               children: [
-                Icon(Icons.search, color: Colors.blue.shade400),
+                Icon(Icons.search, color: Colors.blue.shade400,),
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextField(

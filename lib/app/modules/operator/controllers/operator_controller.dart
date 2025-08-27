@@ -306,6 +306,7 @@ class OperatorController extends GetxController {
       tanggalBerangkat.value =
           (data['tanggalberangkat'] as Timestamp?)?.toDate();
       tanggalKembali.value = (data['tanggalkembali'] as Timestamp?)?.toDate();
+      persetujuan.value = data['disetujuippk'] ?? "none";
       noSpd.value = data['nospd'] ?? '';
 
       peserta.clear();
@@ -501,7 +502,7 @@ class OperatorController extends GetxController {
           return pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              docRef.data()!['suratperintah'] == "Ketua KPU"
+              docRef.data()!['suratperintah'] == "ketua kpu"
                   ? pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.center,
                     children: [
@@ -845,7 +846,7 @@ class OperatorController extends GetxController {
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
                       children: [
                         pw.Text(
-                          "DIKELUARKAN DI : JAMBI",
+                          "DIKELUARKAN DI :   JAMBI",
                           style: pw.TextStyle(fontSize: 10),
                         ),
                         pw.SizedBox(height: 3),
@@ -882,7 +883,9 @@ class OperatorController extends GetxController {
                           textAlign: pw.TextAlign.center,
                           docRef.data()!["suratperintah"] == "ketua kpu"
                               ? docPejabat["currentKetua"]["namapegawai"]
-                              : docPejabat["currentSekretaris"]["namapegawai"],
+                                  .toUpperCase()
+                              : docPejabat["currentSekretaris"]["namapegawai"]
+                                  .toUpperCase(),
                           style: pw.TextStyle(
                             fontSize: 10,
                             fontWeight: pw.FontWeight.bold,
@@ -3514,6 +3517,7 @@ class OperatorController extends GetxController {
     tempatBerangkatT = TextEditingController();
     tempatTujuanT = TextEditingController();
     suratPerintah.value = "";
+    persetujuan.value = "";
     peserta.add(null);
 
     //SPJ
@@ -3542,6 +3546,7 @@ class OperatorController extends GetxController {
     peserta.clear();
     peserta.value = [];
     suratPerintah.value = "";
+    persetujuan.value = "";
     tanggalBerangkat.value = null;
     tanggalKembali.value = null;
 

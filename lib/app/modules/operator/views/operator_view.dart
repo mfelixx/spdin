@@ -47,7 +47,7 @@ class OperatorView extends GetView<OperatorController> {
           ),
           SpeedDialChild(
             child: Icon(Icons.work_history),
-            label: 'SPJ',
+            label: 'SPJ Saya',
             onTap: () => controller.changePage(1),
           ),
           SpeedDialChild(

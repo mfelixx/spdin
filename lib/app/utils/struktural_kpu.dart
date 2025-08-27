@@ -7,6 +7,7 @@ abstract class StrukturKPU {
     "Kabag",
     "Kasubag",
     "Bendahara Pengeluaran",
+    "Staf Fungsional",
     "Honorer",
   ];
   static const List<String> divisi = [

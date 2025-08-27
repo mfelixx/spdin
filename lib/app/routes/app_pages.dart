@@ -36,6 +36,7 @@ class AppPages {
       page: () => AdminView(),
       binding: AdminBinding(),
     ),
+
     GetPage(
       name: _Paths.ADMIN_TAMBAHPEGAWAI,
       page: () => TambahpegawaiView(),

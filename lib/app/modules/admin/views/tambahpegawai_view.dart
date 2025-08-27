@@ -39,6 +39,7 @@ class _TambahpegawaiViewState extends State<TambahpegawaiView> {
         if (!didPop) return;
         if (result == true) {
           await controller.tambahPegawai();
+          controller.clearAllFields();
         } else {
           controller.clearAllFields();
         }

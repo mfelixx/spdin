@@ -11,6 +11,7 @@ class EditperjadinView extends GetView<OperatorController> {
   @override
   Widget build(BuildContext context) {
     controller.cekPersetujuan(perjadinId);
+    print(controller.persetujuan.value == "none" ? "true" : "false");
     return PopScope(
       onPopInvokedWithResult: (bool didPop, dynamic result) {
         if (!didPop) return;
@@ -152,11 +153,7 @@ class EditperjadinView extends GetView<OperatorController> {
                                             ),
                                             items:
                                                 controller.persetujuan.value ==
-                                                            "true" ||
-                                                        controller
-                                                                .persetujuan
-                                                                .value ==
-                                                            "none"
+                                                        "true"
                                                     ? [
                                                       PopupMenuItem(
                                                         value: 'spd',
@@ -313,7 +310,7 @@ class EditperjadinView extends GetView<OperatorController> {
                                       ? ""
                                       : DateFormat("dd MMMM yyyy").format(
                                         controller.tanggalKembali.value!,
-                                      ),
+                                      ).toString(),
                                 ),
                               ),
                             ),

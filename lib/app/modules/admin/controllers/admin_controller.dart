@@ -57,16 +57,48 @@ class AdminController extends GetxController {
   Future<void> tambahPegawai() async {
     CollectionReference collectionUsers = db.collection("users");
 
-    // Inisialisasi Secondary FirebaseApp
-    final FirebaseApp secondaryApp = await Firebase.initializeApp(
-      name: 'SecondaryApp',
-      options: Firebase.app().options,
-    );
+    if (jabatan.value.toLowerCase() == "ketua kpu") {
+      var snapshot =
+          await collectionUsers.where("jabatan", isEqualTo: "ketua kpu").get();
 
-    // Gunakan Auth dari secondary app
-    final FirebaseAuth secondaryAuth = FirebaseAuth.instanceFor(
-      app: secondaryApp,
-    );
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Jabatan Ketua KPU sudah ada");
+        return;
+      }
+    }
+
+    if (jabatan.value.toLowerCase() == "sekretaris kpu") {
+      var snapshot =
+          await collectionUsers
+              .where("jabatan", isEqualTo: "sekretaris kpu")
+              .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Jabatan Sekretaris KPU sudah ada");
+        return;
+      }
+    }
+
+    if (jabatan.value.toLowerCase() == "bendahara pengeluaran") {
+      var snapshot =
+          await collectionUsers
+              .where("jabatan", isEqualTo: "bendahara pengeluaran")
+              .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Jabatan Bendahara Pengeluaran sudah ada");
+        return;
+      }
+    }
+
+    if (role.value.toLowerCase() == "ppk") {
+      var snapshot =
+          await collectionUsers.where("role", isEqualTo: "ppk").get();
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Role PPK sudah ada");
+        return;
+      }
+    }
 
     final querySnap =
         await collectionUsers
@@ -77,12 +109,23 @@ class AdminController extends GetxController {
       "emailpegawai": emailPegawai.text,
       "namapegawai": namaPegawaiT.text,
       "nippegawai": nipPegawaiT.text,
-      "jabatan": jabatan.value,
+      "jabatan": jabatan.value.toLowerCase(),
       "divisi": divisi.value,
       "pangkat": pangkat.value,
       "role": role.value.toLowerCase(),
       "password": passwordT.text,
     };
+
+    // Inisialisasi Secondary FirebaseApp
+    final FirebaseApp secondaryApp = await Firebase.initializeApp(
+      name: 'SecondaryApp',
+      options: Firebase.app().options,
+    );
+
+    // Gunakan Auth dari secondary app
+    final FirebaseAuth secondaryAuth = FirebaseAuth.instanceFor(
+      app: secondaryApp,
+    );
 
     if (querySnap.docs.isEmpty) {
       try {
@@ -133,6 +176,51 @@ class AdminController extends GetxController {
   }
 
   void updatePegawai(String id) async {
+    final collectionUsers = db.collection("users");
+
+    if (jabatan.value.toLowerCase() == "ketua kpu") {
+      var snapshot =
+          await collectionUsers.where("jabatan", isEqualTo: "ketua kpu").get();
+
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Jabatan Ketua KPU sudah ada");
+        return;
+      }
+    }
+
+    if (jabatan.value.toLowerCase() == "sekretaris kpu") {
+      var snapshot =
+          await collectionUsers
+              .where("jabatan", isEqualTo: "sekretaris kpu")
+              .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Jabatan Sekretaris KPU sudah ada");
+        return;
+      }
+    }
+
+    if (jabatan.value.toLowerCase() == "bendahara pengeluaran") {
+      var snapshot =
+          await collectionUsers
+              .where("jabatan", isEqualTo: "bendahara pengeluaran")
+              .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Jabatan Bendahara Pengeluaran sudah ada");
+        return;
+      }
+    }
+
+    if (role.value.toLowerCase() == "ppk") {
+      var snapshot =
+          await collectionUsers.where("role", isEqualTo: "ppk").get();
+      if (snapshot.docs.isNotEmpty) {
+        Get.snackbar("Gagal", "Role PPK sudah ada");
+        return;
+      }
+    }
+
     final result = {
       "namapegawai": namaPegawaiT.text,
       "nippegawai": nipPegawaiT.text,
@@ -142,7 +230,7 @@ class AdminController extends GetxController {
       "role": role.value.toLowerCase(),
     };
     try {
-      await db.collection("users").doc(id).update(result);
+      await collectionUsers.doc(id).update(result);
       Get.snackbar("Sukses", "Pegawai berhasil diupdate");
     } on FirebaseException catch (e) {
       Get.snackbar("Gagal", "Terjadi kesalahan");

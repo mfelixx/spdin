@@ -47,6 +47,16 @@ class PerjadinkuView extends GetView {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data!;
+              if (data.isEmpty) {
+                return SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      'Tidak ada perjadin yang tersedia',
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                  ),
+                );
+              }
               return SliverPadding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
