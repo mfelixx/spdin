@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:perjadin_kpu/app/modules/auth/controllers/auth_controller.dart';
 import 'package:path/path.dart' as path;
+import 'package:perjadin_kpu/app/utils/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 
 class PegawaiController extends GetxController {
@@ -118,6 +119,11 @@ class PegawaiController extends GetxController {
     required String perjadinId,
     required String nipPegawai,
   }) async {
+    bool granted = await PermissionUtils.requestPhotoPermission();
+    if (!granted) {
+      Get.snackbar("Izin Ditolak", "Harap izinkan akses galeri/kamera");
+      return;
+    }
     if (pickerController.images.isEmpty) return;
 
     isUploading.value = true;
